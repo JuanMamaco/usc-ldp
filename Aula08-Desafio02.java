@@ -1,8 +1,8 @@
-package Desafio02;
+package Aula08;
 
 import java.util.Scanner;
 
-public class Desafio01 {
+public class Desafio02 {
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
