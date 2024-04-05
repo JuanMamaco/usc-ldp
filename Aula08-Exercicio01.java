@@ -1,8 +1,8 @@
-package Exercicio01;
+package Aula08;
 
 import java.util.Scanner;
 
-public class Exercicio1 {
+public class Exercicio01 {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Digite um número para verificar: ");
