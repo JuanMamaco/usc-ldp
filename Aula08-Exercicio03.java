@@ -1,8 +1,8 @@
-package Exercicio03;
+package Aula08;
 
 import java.util.Scanner;
 
-public class Exercicio3 {
+public class Exercicio03 {
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
