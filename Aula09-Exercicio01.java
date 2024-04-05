@@ -1,6 +1,6 @@
-package Exercicio01;
+package Aula09;
 
-public class Exercicio1 {
+public class Exercicio01 {
 
 	public static void main(String[] args) {
 		String nomeCompleto = "Juan Peres";
