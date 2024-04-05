@@ -10,7 +10,7 @@ public class Exercicio03 {
 		String cidade = scan.next();
 		
 		if (cidade.equals("Curitiba")) {
-			System.out.println("Curitiba :)");
+			System.out.println("Curitiba");
 		}
 		else {
 			System.out.println("Outra cidade");
