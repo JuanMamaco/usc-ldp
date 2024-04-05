@@ -1,8 +1,8 @@
-package Exercicio04;
+package Aula09;
 
 import java.util.Scanner;
 
-public class Exercicio4 {
+public class Exercicio04 {
 
 	public static void main(String[] args) {
 			Scanner scan = new Scanner(System.in);
@@ -10,7 +10,7 @@ public class Exercicio4 {
 			String cidade = scan.next();
 			
 			if (cidade.equalsIgnoreCase("Curitiba")) {
-				System.out.println("Curitiba :)");
+				System.out.println("Curitiba");
 			}
 			else {
 				System.out.println("Outra cidade");
