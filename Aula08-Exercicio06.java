@@ -1,9 +1,9 @@
-package Exercicio06;
+package Aula08;
 
 import java.util.Random;
 import java.util.Scanner;
 
-public class Exercicio6 {
+public class Exercicio06 {
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
