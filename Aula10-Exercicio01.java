@@ -1,6 +1,6 @@
-package Exercicio01;
+package Aula10;
 
-public class Exercicio1 {
+public class Exercicio01 {
 
 	public static void main(String[] args) {
 		int[] numeros = {15,30,45,60,75};
