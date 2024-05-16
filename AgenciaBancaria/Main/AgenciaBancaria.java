@@ -1,22 +1,24 @@
-package Main;
+package main;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import Model.Pessoa;
-import Model.Conta;
+
+import model.ContaPoupanca;
+import model.Pessoa;
+import model.Conta;
 
 
 public class AgenciaBancaria {
 
     static Scanner input = new Scanner(System.in);
-    static ArrayList<Conta> ContasBancarias;
+    static ArrayList<Conta> contasBancarias;
 
     public static void main(String[] args) {
-        ContasBancarias = new ArrayList<Conta>();
-        Operacoes();
+        contasBancarias = new ArrayList<Conta>();
+        operacoes();
     }
 
-    public static void Operacoes() {
+    public static void operacoes() {
 
         System.out.println("------------------------------------------------------");
         System.out.println("-------------Bem vindos a nossa Agência---------------");
@@ -30,27 +32,27 @@ public class AgenciaBancaria {
         System.out.println("|   Opção 5 - Listar        |");
         System.out.println("|   Opção 6 - Sair          |");
 
-        int Operacao = input.nextInt();;
+        int operacao = input.nextInt();;
 
-        switch (Operacao) {
+        switch (operacao) {
             case 1:
-                CriarConta();
+                criarConta();
                 break;
 
             case 2:
-                Depositar();
+                depositar();
                 break;
 
             case 3:
-                Sacar();
+                sacar();
                 break;
 
             case 4:
-                Transferir();
+                transferir();
                 break;
 
             case 5:
-                ListarContas();
+                listarContas();
                 break;
 
             case 6:
@@ -59,101 +61,140 @@ public class AgenciaBancaria {
 
             default:
                 System.out.println("Opção inválida!");
-                Operacoes();
+                operacoes();
                 break;
         }
     }
 
-    public static void CriarConta() {
-        //System.out.println("Você está criando uma conta\n");
+    public static void criarConta() {
+        System.out.println("-------------------------");
+        System.out.println("***** CRIANDO CONTA *****");
+        System.out.println("-------------------------");
 
-        System.out.println("\nNome: ");
-        String Nome = input.next();
+        System.out.println("Digite seu nome: ");
+        String nome = input.next();
+        input.nextLine();
 
-        System.out.println("\nCPF: ");
-        String CPF = input.next();
+        System.out.println("Digite seu CPF: ");
+        String cpf = input.next();
+        input.nextLine();
 
-        System.out.println("Email: ");
-        String Email = input.next();
+        System.out.println("Digite seu e-mail: ");
+        String email = input.next();
+        input.nextLine();
 
-        Pessoa Cliente = new Pessoa(Nome, CPF, Email);
+        Pessoa cliente = new Pessoa(nome, cpf, email);
 
-        Conta Conta = new Conta(Cliente);
+        System.out.println("***** TIPO DA CONTA *****");
+        System.out.println("|   Opção 1 - Poupança   |");
+        System.out.println("|   Opção 2 - Corrente   |");
+        int opcao = input.nextInt();
 
-        ContasBancarias.add(Conta);
-        System.out.println("--- Sua conta foi criada com sucesso! ---");
+        if (opcao == 1) {
+            ContaPoupanca conta = new ContaPoupanca(cliente, 0.05);
+            contasBancarias.add(conta);
+        } else if (opcao == 2) {
+            Conta conta = new Conta(cliente);
+            contasBancarias.add(conta);
+        }
+        else {
+            System.out.println("XXXXXXXXXXXX Opção inválida XXXXXXXXXXXX");
+        }
+        System.out.println("***** Sua conta foi criada com sucesso! *****");
+        operacoes();
+        }
 
-        Operacoes();
-
-    }
-
-    private static Conta EncontrarConta(int NumeroConta) {
-        Conta Conta = null;
-        if(ContasBancarias.size() > 0) {
-            for(Conta Contaa : ContasBancarias) {
-                if(Contaa.getNumeroConta() == NumeroConta) {
-                    Conta = Contaa;
+    private static Conta encontrarConta(int numeroConta) {
+        Conta conta = null;
+        if(contasBancarias.size() > 0) {
+            for(Conta contaa : contasBancarias) {
+                if(contaa.getNumeroConta() == numeroConta) {
+                    conta = contaa;
                 }
             }
         }
-        return Conta;
+        return conta;
     }
 
-    public static void Depositar() {
+    public static void depositar() {
         System.out.println("Número da conta: ");
-        int NumeroConta = input.nextInt();
-        Conta Conta = EncontrarConta(NumeroConta);
+        int numeroConta = input.nextInt();
+        Conta conta = encontrarConta(numeroConta);
 
-        if(Conta != null) {
+        if(conta != null) {
             System.out.println("Qual valor deseja depositar? ");
-            Double ValorDeposito = input.nextDouble();
+            Double valorDeposito = input.nextDouble();
 
-            Conta.Depositar(ValorDeposito);
+            conta.depositar(valorDeposito);
         }else {
             System.out.println("--- Conta não encontrada ---");
         }
 
-        Operacoes();
+        operacoes();
 
     }
 
-    public static void Sacar() {
+    public static void sacar() {
         System.out.println("Número da conta: ");
-        int NumeroConta = input.nextInt();
+        int numeroConta = input.nextInt();
 
-        Conta Conta = EncontrarConta(NumeroConta);
+        Conta conta = encontrarConta(numeroConta);
 
-        if(Conta != null) {
+        if(conta != null) {
             System.out.println("Qual valor deseja sacar? ");
-            Double ValorSaque = input.nextDouble();
+            Double valorSaque = input.nextDouble();
 
-            Conta.Sacar(ValorSaque);
+            conta.sacar(valorSaque);
             System.out.println("--- Saque realizado com sucesso! ---");
         }else {
             System.out.println("--- Conta não encontrada ---");
         }
 
-        Operacoes();
+        operacoes();
 
     }
 
-    public static void Transferir() {
+    public static void transferir() {
+
+        System.out.println("|   Opção 1 - Transferir via Ted  |");
+        System.out.println("|   Opção 2 - Voltar para o menu  |");
+
+        int tranferencia = input.nextInt();;
+
+        switch (tranferencia) {
+
+            case 1:
+                transferenciaTed();
+                break;
+
+            case 2:
+                operacoes();
+                break;
+
+            default:
+                System.out.println("Opção inválida!");
+                transferir();
+                break;
+        }
+    }
+
+    public static void transferenciaTed() {
         System.out.println("Número da conta que vai enviar a transferência: ");
-        int NumeroContaRemetente = input.nextInt();
+        int numeroContaRemetente = input.nextInt();
 
-        Conta ContaRemetente = EncontrarConta(NumeroContaRemetente);
+        Conta contaRemetente = encontrarConta(numeroContaRemetente);
 
-        if(ContaRemetente != null) {
+        if(contaRemetente != null) {
             System.out.println("Número da conta do destinatário: ");
-            int NumeroContaDestinatario = input.nextInt();
+            int numeroContaDestinatario = input.nextInt();
 
-            Conta ContaDestinatario = EncontrarConta(NumeroContaDestinatario);
+            Conta contaDestinatario = encontrarConta(numeroContaDestinatario);
 
-            if(ContaDestinatario != null) {
+            if(contaDestinatario != null) {
                 System.out.println("Valor da transferência: ");
-                Double Valor = input.nextDouble();
+                Double valor = input.nextDouble();
 
-                ContaRemetente.Transferencia(ContaDestinatario, Valor);
+                contaRemetente.ted(contaDestinatario, valor);
 
             }else {
                 System.out.println("--- A conta para depósito não foi encontrada ---");
@@ -162,20 +203,54 @@ public class AgenciaBancaria {
         }else {
             System.out.println("--- Conta para transferência não encontrada ---");
         }
-        Operacoes();
+        transferir();
     }
 
-    public static void ListarContas() {
-        if(ContasBancarias.size() > 0) {
-            for(Conta Conta: ContasBancarias) {
-                System.out.println(Conta);
+    public static void listarContas() {
+        if(contasBancarias.size() > 0) {
+            System.out.println("***** QUAIS CONTAS DESEJA LISTAR? *****");
+            System.out.println("|   Opção 1 - Poupança   |");
+            System.out.println("|   Opção 2 - Corrente   |");
+            System.out.println("|   Opção 3 - Todas      |");
+            int opcao = input.nextInt();
+
+            switch (opcao){
+                case 1:
+                    for(Conta conta: contasBancarias) {
+                        if (conta instanceof ContaPoupanca) {
+                            System.out.println(conta);
+                            System.out.println("Saldo c/ rendimento: ");
+                            System.out.println("Tipo de Conta: Poupança");
+                        }
+                    }
+                    break;
+                case 2:
+                    for(Conta conta: contasBancarias) {
+                        if (!(conta instanceof ContaPoupanca)) {
+                            System.out.println(conta);
+                            System.out.println("Tipo de Conta: Corrente");
+                        }
+                    }
+                    break;
+                case 3:
+                    for(Conta conta: contasBancarias) {
+                        System.out.println(conta);
+                        if (conta instanceof ContaPoupanca) {
+                            System.out.println("Tipo de Conta: Poupança");
+                        } else {
+                            System.out.println("Tipo de Conta: Corrente");
+                        }
+                    }
+                    break;
+                default:
+                    System.out.println("XXXXXXXXXXXX Opção inválida XXXXXXXXXXXX");
+                    break;
             }
-        }else {
+        }
+        else {
             System.out.println("--- Não há contas cadastradas ---");
         }
 
-        Operacoes();
+        operacoes();
     }
 }
-
-
