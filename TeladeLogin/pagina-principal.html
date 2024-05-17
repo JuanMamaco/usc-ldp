@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            transition: background-color 0.5s, color 0.5s;
+        }
+        h1 {
+            margin: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px; /* Border radius aplicado */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="welcomeMessage">Seja bem-vindo, <span id="userName"></span></h1>
+    <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGRxaXNlaXJvMmphYTl5OG01NTRlMjdyd240MG0yc3RkbHkydWt4YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/DqPp7OUBeMekM/giphy.gif" alt="Macaquinho">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const nomeUsuario = localStorage.getItem('nomeUsuario');
+            if (nomeUsuario) {
+                document.getElementById('userName').textContent = nomeUsuario;
+            } else {
+                document.getElementById('welcomeMessage').textContent = 'Seja bem-vindo!';
+            }
+
+            function getRandomColor() {
+                const letters = '0123456789ABCDEF';
+                let color = '#';
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+
+            function invertColor(hex) {
+                let color = hex.slice(1); // Remove #
+                color = parseInt(color, 16); // Convert to integer
+                color = 0xFFFFFF ^ color; // Invert color
+                color = color.toString(16); // Convert back to hex
+                color = ('000000' + color).slice(-6); // Pad with leading zeros
+                return '#' + color;
+            }
+
+            const bgColor = getRandomColor();
+            const textColor = invertColor(bgColor);
+
+            document.body.style.backgroundColor = bgColor;
+            document.body.style.color = textColor;
+        });
+    </script>
+</body>
+</html>
